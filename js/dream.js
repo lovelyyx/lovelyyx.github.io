@@ -62,10 +62,51 @@ scene.addEventListener('pointermove', event => {
 scene.addEventListener('pointerleave', () => { scene.style.transform = ''; });
 
 const musicBubble = document.querySelector('#musicBubble');
+let audioContext;
+let musicTimer;
+const melody = [261.63, 329.63, 392, 523.25, 440, 392, 329.63, 293.66];
+
+function playMelody() {
+  if (!audioContext || audioContext.state !== 'running') return;
+  const now = audioContext.currentTime;
+  melody.forEach((frequency, index) => {
+    const oscillator = audioContext.createOscillator();
+    const harmony = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    oscillator.type = 'sine';
+    harmony.type = 'triangle';
+    oscillator.frequency.value = frequency;
+    harmony.frequency.value = frequency / 2;
+    gain.gain.setValueAtTime(0, now + index * .42);
+    gain.gain.linearRampToValueAtTime(.055, now + index * .42 + .04);
+    gain.gain.exponentialRampToValueAtTime(.001, now + index * .42 + .38);
+    oscillator.connect(gain);
+    harmony.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(now + index * .42);
+    harmony.start(now + index * .42);
+    oscillator.stop(now + index * .42 + .4);
+    harmony.stop(now + index * .42 + .4);
+  });
+}
+
 musicBubble.addEventListener('click', event => {
   event.stopPropagation();
-  musicBubble.classList.toggle('is-playing');
-  const playing = musicBubble.classList.contains('is-playing');
+  const willPlay = !musicBubble.classList.contains('is-playing');
+  if (willPlay) {
+    audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+    audioContext.resume().then(() => {
+      musicBubble.dataset.audioState = audioContext.state;
+      playMelody();
+    });
+    clearInterval(musicTimer);
+    musicTimer = setInterval(playMelody, 3800);
+  } else {
+    clearInterval(musicTimer);
+    audioContext?.suspend().then(() => { musicBubble.dataset.audioState = audioContext.state; });
+  }
+  musicBubble.classList.toggle('is-playing', willPlay);
+  const playing = willPlay;
   musicBubble.querySelector('i').className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
   musicBubble.querySelector('span').textContent = playing ? '快乐正在播放中' : '点我听见快乐';
   const rect = musicBubble.getBoundingClientRect();
@@ -116,6 +157,34 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
   target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const rect = button.getBoundingClientRect();
   burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+}));
+
+const postViewButtons = [...document.querySelectorAll('.post-view-switch button')];
+const postViewStatus = document.querySelector('#postViewStatus');
+postViewButtons.forEach(button => button.addEventListener('click', () => {
+  const view = button.dataset.view;
+  postViewButtons.forEach(item => {
+    const active = item === button;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+  categoryButtons.forEach((item, index) => {
+    item.classList.toggle('active', index === 0);
+    item.setAttribute('aria-pressed', String(index === 0));
+  });
+  postCards.forEach(card => card.classList.remove('category-muted', 'category-match', 'view-hidden'));
+  const ordered = [...postCards].sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+  let visible = ordered;
+  if (view === 'recent') visible = ordered.slice(0, 3);
+  if (view === 'featured') visible = ordered.filter(card => card.dataset.featured === 'true').slice(0, 3);
+  postCards.forEach(card => card.classList.toggle('view-hidden', !visible.includes(card)));
+  const labels = {
+    recent: `正在展示最近发布的 ${visible.length} 篇文章`,
+    featured: `正在展示精选的 ${visible.length} 篇文章`,
+    all: `正在展示全部 ${visible.length} 篇文章`
+  };
+  postViewStatus.textContent = labels[view];
+  document.querySelector('#posts').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }));
 
 window.addEventListener('resize', resizeCanvas);

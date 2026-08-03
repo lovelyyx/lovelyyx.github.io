@@ -18,3 +18,13 @@
 .post-card.category-match{animation:categoryPop .55s cubic-bezier(.2,.8,.2,1)}
 @keyframes categoryPop{50%{transform:translateY(-12px) scale(1.025)}}
 @media(max-width:560px){.brand-avatar{width:36px;height:36px}.category-menu{margin-top:24px}.category-buttons{display:grid;grid-template-columns:1fr 1fr}.category-buttons button{width:100%}.mood-note{margin-top:38px}}
+
+/* Post display switch */
+.post-view-switch{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-12px 0 24px}
+.post-view-switch button{border:0;border-radius:999px;background:#fff1c8;color:#6f5944;padding:9px 13px;cursor:pointer;font-weight:700;transition:.2s}
+.post-view-switch button i{margin-right:6px;color:#dc9b28}
+.post-view-switch button:hover,.post-view-switch button.active{background:#473a2d;color:#fff;transform:translateY(-2px)}
+.post-view-switch button.active i{color:#f8d767}
+.post-view-switch span{margin-left:auto;color:#9b856c;font-size:12px}
+.post-card.view-hidden{display:none}
+@media(max-width:650px){.post-view-switch{display:grid;grid-template-columns:1fr 1fr}.post-view-switch button:last-of-type{grid-column:1/3}.post-view-switch span{grid-column:1/3;margin:2px 0 0;text-align:center}}
