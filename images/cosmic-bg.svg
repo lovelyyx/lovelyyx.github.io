@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="55%" r="80%"><stop offset="0" stop-color="#092872"/><stop offset=".52" stop-color="#03123b"/><stop offset="1" stop-color="#01030d"/></radialGradient>
+    <radialGradient id="glow"><stop stop-color="#fff" stop-opacity=".96"/><stop offset=".22" stop-color="#8ac7ff" stop-opacity=".7"/><stop offset="1" stop-color="#3c73ff" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="20"/></filter>
+    <pattern id="stars" width="135" height="110" patternUnits="userSpaceOnUse">
+      <circle cx="13" cy="19" r="1.2" fill="#fff"/><circle cx="81" cy="45" r=".8" fill="#8fc8ff"/><circle cx="119" cy="12" r="1.5" fill="#fff"/><circle cx="39" cy="94" r=".7" fill="#fff"/><circle cx="106" cy="87" r="1" fill="#badcff"/>
+    </pattern>
+    <linearGradient id="trail"><stop stop-color="#86b9ff" stop-opacity="0"/><stop offset=".55" stop-color="#c9e0ff" stop-opacity=".75"/><stop offset="1" stop-color="#fff"/></linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/><rect width="1920" height="1080" fill="url(#stars)" opacity=".75"/>
+  <ellipse cx="260" cy="920" rx="620" ry="260" fill="url(#glow)" opacity=".85" filter="url(#blur)"/><ellipse cx="1480" cy="820" rx="500" ry="170" fill="#173d91" opacity=".18" filter="url(#blur)"/>
+  <g opacity=".7" stroke="url(#trail)" stroke-width="2"><path d="M70 390L650 90"/><path d="M440 370L1070 20"/><path d="M910 370L1440 80"/><path d="M1220 410L1830 70"/><path d="M35 660L520 410"/><path d="M1030 690L1840 240"/></g>
+  <g fill="#fff"><circle cx="650" cy="90" r="3"/><circle cx="1070" cy="20" r="2.5"/><circle cx="1440" cy="80" r="3"/><circle cx="520" cy="410" r="2"/></g>
+  <path d="M0 1000 Q360 830 720 980 T1450 910 T1920 950 V1080 H0Z" fill="#020716" opacity=".9"/>
+</svg>
