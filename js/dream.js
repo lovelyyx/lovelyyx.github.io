@@ -98,6 +98,26 @@ document.querySelectorAll('.close-dialog').forEach(button => button.addEventList
 searchInput.addEventListener('input', event => renderSearch(event.target.value));
 document.querySelector('#currentYear').textContent = new Date().getFullYear();
 
+const categoryButtons = [...document.querySelectorAll('.category-buttons button')];
+const postCards = [...document.querySelectorAll('.post-card')];
+categoryButtons.forEach(button => button.addEventListener('click', () => {
+  const category = button.dataset.category;
+  categoryButtons.forEach(item => {
+    const active = item === button;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+  postCards.forEach(card => {
+    const matches = category === 'all' || card.dataset.category === category;
+    card.classList.toggle('category-muted', !matches);
+    card.classList.toggle('category-match', matches && category !== 'all');
+  });
+  const target = category === 'all' ? document.querySelector('#posts') : postCards.find(card => card.dataset.category === category);
+  target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const rect = button.getBoundingClientRect();
+  burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+}));
+
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 animateParticles();
