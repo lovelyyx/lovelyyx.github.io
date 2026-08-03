@@ -3,96 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#08070d">
-  <meta name="description" content="lovelyyx 的个人博客，记录技术、阅读与生活。">
+  <meta name="theme-color" content="#f9d98a">
+  <meta name="description" content="Lovelyyx 的个人博客，记录技术、阅读与生活。">
   <title>Lovelyyx · 个人博客</title>
   <link rel="icon" href="/images/favicon-32x32-next.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/css/dream.css">
 </head>
 <body>
-  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
-  <nav class="floating-nav" aria-label="快捷导航">
-    <button id="flipButton" class="nav-button" aria-label="翻转名片" title="翻转名片"><i class="fa-solid fa-rotate"></i></button>
-    <a class="nav-button" href="/" aria-label="首页" title="首页"><i class="fa-solid fa-house"></i></a>
-    <button id="searchButton" class="nav-button" aria-label="搜索" title="搜索"><i class="fa-solid fa-magnifying-glass"></i></button>
+  <canvas id="sparkCanvas" aria-hidden="true"></canvas>
+  <div class="sun-orb" aria-hidden="true"></div>
+
+  <nav class="top-nav" aria-label="主导航">
+    <a class="brand" href="/"><span>LY</span> Lovelyyx</a>
+    <div class="nav-links">
+      <a href="#posts">文章</a>
+      <button type="button" id="aboutButton">关于</button>
+      <button type="button" id="searchButton" aria-label="搜索文章"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
   </nav>
 
-  <div class="site-shell" id="siteShell">
-    <section class="face front-face">
-      <header class="hero">
-        <div class="avatar-ring"><img src="/images/avatar.gif" alt="Lovelyyx 的头像"></div>
-        <p class="eyebrow">HELLO, I'M LOVELYYX</p>
-        <h1>在代码与日常之间，<br><span>收集微小而明亮的瞬间。</span></h1>
-        <p class="intro">这里记录学习、技术探索和生活随想。愿每一次书写，都让混沌变得清晰一点。</p>
-        <div class="quick-links" aria-label="内容导航">
-          <a href="#posts"><i class="fa-solid fa-box-archive"></i><span>归档</span></a>
-          <button type="button" id="categoryButton"><i class="fa-solid fa-list"></i><span>分类</span></button>
-          <button type="button" id="tagButton"><i class="fa-solid fa-tags"></i><span>标签</span></button>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> HELLO, NICE TO MEET YOU</p>
+        <h1>把喜欢的事，<br><em>慢慢做成生活。</em></h1>
+        <p class="lead">这里收藏代码里的灵光、生活里的好天气，<br>还有每一次认真出发的心情。</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#posts">去看文章 <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="round-action" href="https://github.com/lovelyyx" target="_blank" rel="noopener" aria-label="访问 GitHub"><i class="fa-brands fa-github"></i></a>
         </div>
-        <div class="tag-cloud" id="tags" aria-label="按标签筛选文章">
-          <button type="button" data-filter="all" class="active">全部</button><button type="button" data-filter="GitHub">GitHub</button><button type="button" data-filter="Hexo">Hexo</button><button type="button" data-filter="Markdown">Markdown</button><button type="button" data-filter="前端">前端</button><button type="button" data-filter="学习笔记">学习笔记</button><button type="button" data-filter="项目实践">项目实践</button><button type="button" data-filter="生活">生活</button><button type="button" data-filter="思考">思考</button><button type="button" data-filter="效率工具">效率工具</button><button type="button" data-filter="开源">开源</button>
+        <div class="mood-note"><i class="fa-solid fa-headphones"></i><span>NOW PLAYING</span><b>阳光正好，适合写点什么</b></div>
+      </div>
+
+      <div class="character-scene" id="characterScene">
+        <div class="scribble one">♪</div><div class="scribble two">✿</div><div class="scribble three">♫</div>
+        <div class="photo-shape">
+          <img src="/images/zsiga-listening.png" alt="戴着耳机坐在木箱上的 Zsiga">
         </div>
-      </header>
-
-      <main class="content-grid">
-        <article class="panel archive-panel" id="posts">
-          <div class="panel-title"><p>ALL WRITINGS</p><h2>Posts</h2><span>03</span></div>
-          <div class="filter-status" id="filterStatus">正在显示全部 3 篇文章</div>
-          <section class="year-group">
-            <h3>2024</h3>
-            <ol>
-              <li data-tags="GitHub Hexo 项目实践 生活 思考 开源"><a href="/2024/07/27/newpapername/"><span>27 JUL</span><strong>我的个人网站，终于见面了</strong><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
-              <li data-tags="Markdown 前端 学习笔记 效率工具"><a href="/2024/07/27/A-Quick-Start-for-Blog-Writing-Markdown/"><span>27 JUL</span><strong>A Quick Start for Blog Writing — Markdown</strong><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
-              <li data-tags="Hexo 前端 学习笔记 开源"><a href="/2024/07/27/hello-world/"><span>27 JUL</span><strong>Hello World</strong><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
-            </ol>
-            <p class="empty-filter" id="emptyFilter" hidden>这个标签下暂时没有文章。</p>
-          </section>
-          <blockquote>“持续创造，持续好奇，也持续热爱平凡的生活。”</blockquote>
-        </article>
-
-        <aside class="side-column">
-          <section class="panel mini-profile" id="categories">
-            <p class="section-kicker">ABOUT THIS SPACE</p>
-            <h2>Lovelyyx</h2>
-            <p>Developer & lifelong learner.<br>正在把想法慢慢变成作品。</p>
-            <div class="stats"><span><b>3</b>文章</span><span><b>1</b>年份</span><span><b>∞</b>灵感</span></div>
-          </section>
-          <section class="panel social-card">
-            <p class="section-kicker">FIND ME</p>
-            <h2>社交链接</h2>
-            <nav>
-              <a href="https://github.com/lovelyyx" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i><span>GitHub</span><b>↗</b></a>
-              <a href="mailto:yuxinfei90@gmail.com"><i class="fa-regular fa-envelope"></i><span>Email</span><b>↗</b></a>
-              <a href="/archives/"><i class="fa-solid fa-rss"></i><span>Archive</span><b>↗</b></a>
-            </nav>
-          </section>
-          <section class="panel license-card">
-            <i class="fa-brands fa-creative-commons"></i>
-            <p>文章采用 CC BY-NC-SA 4.0 协议。转载时请注明原文地址及作者。</p>
-          </section>
-        </aside>
-      </main>
-
-      <footer><span>© 2024 — <b id="currentYear">2026</b> Lovelyyx</span><span>Built with curiosity &amp; care.</span></footer>
-    </section>
-
-    <section class="face back-face" aria-hidden="true">
-      <div class="back-content">
-        <p class="eyebrow">A LITTLE MORE ABOUT ME</p>
-        <h2>你好，很高兴在这里遇见你。</h2>
-        <p>这个博客是我的数字花园。技术是主线，阅读和生活是支线；不追求标准答案，只记录真实的探索过程。</p>
-        <button id="backButton"><i class="fa-solid fa-arrow-left"></i> 返回文章</button>
+        <button class="music-bubble" id="musicBubble" type="button"><i class="fa-solid fa-play"></i><span>点我听见快乐</span></button>
       </div>
     </section>
-  </div>
+
+    <section class="posts-section" id="posts">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span></span> LATEST STORIES</p><h2>最近写下的</h2></div>
+        <p>灵感不一定轰轰烈烈，<br>也可以是今天刚好想明白的一件小事。</p>
+      </div>
+      <div class="post-grid">
+        <a class="post-card card-yellow" href="/2024/07/27/newpapername/">
+          <div class="post-icon"><i class="fa-solid fa-sun"></i></div>
+          <p class="post-meta">2024.07.27 · 生活</p>
+          <h3>我的个人网站，终于见面了</h3>
+          <p class="post-summary">从一个空白页面开始，把自己的小世界一点点搭起来。</p>
+          <span class="read-more">继续阅读 <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a class="post-card card-green" href="/2024/07/27/A-Quick-Start-for-Blog-Writing-Markdown/">
+          <div class="post-icon"><i class="fa-solid fa-pencil"></i></div>
+          <p class="post-meta">2024.07.27 · 学习</p>
+          <h3>A Quick Start for Blog Writing</h3>
+          <p class="post-summary">用 Markdown 轻松开始写作，让内容回到表达本身。</p>
+          <span class="read-more">继续阅读 <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a class="post-card card-orange" href="/2024/07/27/hello-world/">
+          <div class="post-icon"><i class="fa-solid fa-face-smile"></i></div>
+          <p class="post-meta">2024.07.27 · 开始</p>
+          <h3>Hello World</h3>
+          <p class="post-summary">所有故事都有第一句，这是属于博客的第一声问候。</p>
+          <span class="read-more">继续阅读 <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© 2024 — <b id="currentYear"></b> Lovelyyx</span><span>Keep sunny, keep curious ☀</span></footer>
 
   <dialog id="searchDialog">
-    <button class="close-search" aria-label="关闭搜索">×</button>
-    <label for="searchInput">搜索文章</label>
-    <input id="searchInput" type="search" placeholder="输入标题或关键词…" autocomplete="off">
+    <button class="close-dialog" type="button" aria-label="关闭搜索">×</button>
+    <p class="eyebrow"><span></span> SEARCH</p>
+    <h2>今天想读什么？</h2>
+    <input id="searchInput" type="search" placeholder="输入文章标题或关键词…" aria-label="搜索文章" autocomplete="off">
     <div id="searchResults" class="search-results"></div>
+  </dialog>
+
+  <dialog id="aboutDialog">
+    <button class="close-dialog" type="button" aria-label="关闭关于">×</button>
+    <p class="eyebrow"><span></span> ABOUT ME</p>
+    <h2>你好，我是 Lovelyyx</h2>
+    <p>喜欢折腾技术，也喜欢记录生活。这个博客是我的数字花园，希望你在这里也能遇见一点好心情。</p>
+    <a class="primary-action" href="https://github.com/lovelyyx" target="_blank" rel="noopener">在 GitHub 找到我</a>
   </dialog>
   <script src="/js/dream.js"></script>
 </body>
