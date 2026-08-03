@@ -161,6 +161,7 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
 
 const postViewButtons = [...document.querySelectorAll('.post-view-switch button')];
 const postViewStatus = document.querySelector('#postViewStatus');
+const postGrid = document.querySelector('.post-grid');
 postViewButtons.forEach(button => button.addEventListener('click', () => {
   const view = button.dataset.view;
   postViewButtons.forEach(item => {
@@ -173,6 +174,8 @@ postViewButtons.forEach(button => button.addEventListener('click', () => {
     item.setAttribute('aria-pressed', String(index === 0));
   });
   postCards.forEach(card => card.classList.remove('category-muted', 'category-match', 'view-hidden'));
+  postGrid.classList.remove('view-recent', 'view-featured', 'view-all');
+  postGrid.classList.add(`view-${view}`);
   const ordered = [...postCards].sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
   let visible = ordered;
   if (view === 'recent') visible = ordered.slice(0, 3);
