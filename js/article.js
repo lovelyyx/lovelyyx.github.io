@@ -52,10 +52,10 @@ async function copyCode(code, button) {
     document.execCommand('copy');
     area.remove();
   }
-  button.textContent = '已复制';
+  button.textContent = 'Copied';
   button.classList.add('copied');
   setTimeout(() => {
-    button.textContent = '复制';
+    button.textContent = 'Copy';
     button.classList.remove('copied');
   }, 1600);
 }
@@ -70,8 +70,8 @@ function addCopyButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-code';
-    button.textContent = '复制';
-    button.setAttribute('aria-label', '复制代码');
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy code');
     button.addEventListener('click', () => copyCode(pre.querySelector('code') || pre, button));
     shell.appendChild(button);
   });
