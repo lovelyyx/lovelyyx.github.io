@@ -24,3 +24,6 @@
 .article-body table{display:table;max-width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #ead8af;border-radius:14px;margin:22px 0}
 .article-body th,.article-body td{padding:12px 14px;border-right:1px solid #ead8af;border-bottom:1px solid #ead8af;vertical-align:top;text-align:left;overflow-wrap:anywhere}
 .article-body tr:last-child td{border-bottom:0}.article-body th:last-child,.article-body td:last-child{border-right:0}
+.code-shell pre,.code-shell code{font-family:"Cascadia Code","JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13.5px;line-height:1.72;letter-spacing:.01em}
+.copy-code{font-family:Inter,"SF Pro Text","Segoe UI",Arial,sans-serif;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.copy-code.copied{letter-spacing:.04em}
