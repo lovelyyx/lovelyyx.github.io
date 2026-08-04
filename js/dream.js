@@ -117,6 +117,7 @@ const posts = [
   { title: '我的个人网站，终于见面了', meta: '2024 · 生活', url: '/2024/07/27/newpapername/' },
   { title: 'A Quick Start for Blog Writing', meta: '2024 · 学习 · Markdown', url: '/2024/07/27/A-Quick-Start-for-Blog-Writing-Markdown/' },
   { title: 'Hello World', meta: '2024 · 开始 · Hexo', url: '/2024/07/27/hello-world/' }
+  { title: 'M3DocRAG', meta: '2026 · RAG', url: '/2026/08/04/M3DocRAG/' }
 ];
 
 const searchDialog = document.querySelector('#searchDialog');
