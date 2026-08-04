@@ -49,13 +49,15 @@ layout: null
             {% endfor %}
           </div>
           {% assign seen_subcategories = "|" %}
-          <div class="subcategory-buttons" aria-label="文章子分类">
+          <div class="subcategory-buttons" aria-label="文章子分类" hidden>
             {% for post in site.posts %}
               {% if post.subcategory %}
-                {% assign subcategory_token = post.subcategory | prepend: "|" | append: "|" %}
+                {% assign parent_category = post.categories | first %}
+                {% capture subcategory_key %}{{ parent_category }}::{{ post.subcategory }}{% endcapture %}
+                {% assign subcategory_token = subcategory_key | prepend: "|" | append: "|" %}
                 {% unless seen_subcategories contains subcategory_token %}
-                  <button type="button" data-subcategory="{{ post.subcategory }}" aria-pressed="false"><i class="fa-solid fa-tag"></i>{{ post.subcategory }}</button>
-                  {% assign seen_subcategories = seen_subcategories | append: post.subcategory | append: "|" %}
+                  <button type="button" data-parent-category="{{ parent_category }}" data-subcategory="{{ post.subcategory }}" aria-pressed="false" hidden><i class="fa-solid fa-tag"></i>{{ post.subcategory }}</button>
+                  {% assign seen_subcategories = seen_subcategories | append: subcategory_key | append: "|" %}
                 {% endunless %}
               {% endif %}
             {% endfor %}
@@ -87,7 +89,7 @@ layout: null
         {% for post in site.posts %}
           {% assign category = post.categories | first %}
           {% case category %}{% when "生活" %}{% assign card_color = "card-yellow" %}{% assign post_icon = "fa-sun" %}{% when "学习" %}{% assign card_color = "card-green" %}{% assign post_icon = "fa-pencil" %}{% else %}{% assign card_color = "card-orange" %}{% assign post_icon = "fa-face-smile" %}{% endcase %}
-          <a class="post-card {{ card_color }}" data-category="{{ category }}" data-subcategory="{{ post.subcategory }}" data-date="{{ post.date | date_to_xmlschema }}" data-featured="{{ post.featured | default: false }}" href="{{ post.url | relative_url }}">
+          <a class="post-card {{ card_color }}" data-category="{{ category }}" data-subcategory="{{ post.subcategory }}" data-date="{{ post.date | date_to_xmlschema }}" data-featured="{{ post.featured | default: false }}" href="{{ post.url | relative_url }}"{% if forloop.index > 3 %} hidden{% endif %}>
             <div class="post-icon"><i class="fa-solid {{ post_icon }}"></i></div>
             <p class="post-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ category }}{% if post.subcategory %} · {{ post.subcategory }}{% endif %}</p>
             <h3>{{ post.title }}</h3>

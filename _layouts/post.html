@@ -25,7 +25,7 @@
       <div class="article-meta">
         <span>{{ page.date | date: "%Y.%m.%d" }}</span>
         <span>{{ page.categories | first | default: "随笔" }}</span>
-        {% if page.subcategory %}<span>{{ page.subcategory }}</span>{% endif %}
+        {% if page.subcategory %}<span class="article-subcategory">子分类 · {{ page.subcategory }}</span>{% endif %}
         {% assign reading_minutes = content | strip_html | size | divided_by: 500 | plus: 1 %}
         <span>约 {{ reading_minutes }} 分钟</span>
       </div>

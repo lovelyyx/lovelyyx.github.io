@@ -57,6 +57,7 @@
 .post-grid .post-card.view-hidden{display:none}
 .subcategory-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .subcategory-buttons:empty{display:none}
+.subcategory-buttons[hidden],.subcategory-buttons button[hidden],.post-card[hidden]{display:none!important}
 .subcategory-buttons button{border:1px solid #ead8af;border-radius:999px;background:#fffaf0;color:#806b55;padding:7px 11px;cursor:pointer;font-size:12px;transition:.2s}
 .subcategory-buttons button i{margin-right:6px;color:#dc9b28}
 .subcategory-buttons button:hover,.subcategory-buttons button.active{background:#f8d767;color:#473a2d;transform:translateY(-2px)}

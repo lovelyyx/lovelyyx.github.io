@@ -141,6 +141,7 @@ document.querySelector('#currentYear').textContent = new Date().getFullYear();
 
 const categoryButtons = [...document.querySelectorAll('.category-buttons button')];
 const subcategoryButtons = [...document.querySelectorAll('.subcategory-buttons button')];
+const subcategoryMenu = document.querySelector('.subcategory-buttons');
 const postCards = [...document.querySelectorAll('.post-card')];
 categoryButtons.forEach(button => button.addEventListener('click', () => {
   const category = button.dataset.category;
@@ -152,9 +153,13 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
   subcategoryButtons.forEach(item => {
     item.classList.remove('active');
     item.setAttribute('aria-pressed', 'false');
+    item.hidden = category === 'all' || item.dataset.parentCategory !== category;
   });
+  subcategoryMenu.hidden = category === 'all' || !subcategoryButtons.some(item => item.dataset.parentCategory === category);
   postCards.forEach(card => {
     const matches = category === 'all' || card.dataset.category === category;
+    card.hidden = false;
+    card.classList.remove('view-hidden');
     card.classList.toggle('category-muted', !matches);
     card.classList.toggle('category-match', matches && category !== 'all');
   });
@@ -166,9 +171,11 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
 
 subcategoryButtons.forEach(button => button.addEventListener('click', () => {
   const subcategory = button.dataset.subcategory;
-  categoryButtons.forEach((item, index) => {
-    item.classList.toggle('active', index === 0);
-    item.setAttribute('aria-pressed', String(index === 0));
+  const parentCategory = button.dataset.parentCategory;
+  categoryButtons.forEach(item => {
+    const active = item.dataset.category === parentCategory;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
   });
   subcategoryButtons.forEach(item => {
     const active = item === button;
@@ -176,7 +183,9 @@ subcategoryButtons.forEach(button => button.addEventListener('click', () => {
     item.setAttribute('aria-pressed', String(active));
   });
   postCards.forEach(card => {
-    const matches = card.dataset.subcategory === subcategory;
+    const matches = card.dataset.category === parentCategory && card.dataset.subcategory === subcategory;
+    card.hidden = false;
+    card.classList.remove('view-hidden');
     card.classList.toggle('category-muted', !matches);
     card.classList.toggle('category-match', matches);
   });
@@ -202,15 +211,24 @@ postViewButtons.forEach(button => button.addEventListener('click', () => {
   subcategoryButtons.forEach(item => {
     item.classList.remove('active');
     item.setAttribute('aria-pressed', 'false');
+    item.hidden = true;
   });
-  postCards.forEach(card => card.classList.remove('category-muted', 'category-match', 'view-hidden'));
+  subcategoryMenu.hidden = true;
+  postCards.forEach(card => {
+    card.hidden = false;
+    card.classList.remove('category-muted', 'category-match', 'view-hidden');
+  });
   postGrid.classList.remove('view-recent', 'view-featured', 'view-all');
   postGrid.classList.add(`view-${view}`);
   const ordered = [...postCards].sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
   let visible = ordered;
   if (view === 'recent') visible = ordered.slice(0, 3);
   if (view === 'featured') visible = ordered.filter(card => card.dataset.featured === 'true').slice(0, 3);
-  postCards.forEach(card => card.classList.toggle('view-hidden', !visible.includes(card)));
+  postCards.forEach(card => {
+    const hidden = !visible.includes(card);
+    card.hidden = hidden;
+    card.classList.toggle('view-hidden', hidden);
+  });
   const labels = {
     recent: `正在展示最近发布的 ${visible.length} 篇文章`,
     featured: `正在展示精选的 ${visible.length} 篇文章`,
