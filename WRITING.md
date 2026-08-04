@@ -107,3 +107,34 @@ featured: false
 - `css/article.css`
 
 它们是公共页面和样式。以后每次发文章，通常只会新增或修改 `_posts` 中的一个 `.md` 文件。
+
+## 可折叠并可复制的代码
+
+折叠代码必须在 `details` 后添加 `markdown="1"`：
+
+````markdown
+<details markdown="1">
+<summary>点击展开代码</summary>
+
+```bash
+python -m pip install torch
+```
+
+</details>
+````
+
+所有代码块都会自动显示“复制”按钮。
+
+## 自定义表格列宽并隐藏表头
+
+在普通 Markdown 表格后增加一行属性：
+
+```markdown
+|  |  |
+| --- | --- |
+| 论文题目 | M3DocRAG: Multi-modal Retrieval is What You Need... |
+| 作者与单位 | Jaemin Cho 等；UNC Chapel Hill、Bloomberg |
+{: .custom-cols .no-header style="--col-1:22%;--col-2:78%;" }
+```
+
+`22%` 是左列宽度，`78%` 是右列宽度，可以自行修改；`.no-header` 会隐藏空表头。

@@ -21,3 +21,18 @@ featured: false
 
 > 需要强调的话，可以这样写。
 
+<details markdown="1">
+<summary>点击展开代码</summary>
+
+```python
+print("Hello, Lovelyyx!")
+```
+
+</details>
+
+|  |  |
+| --- | --- |
+| 项目 | 内容 |
+| 说明 | 这里填写较长的说明文字 |
+{: .custom-cols .no-header style="--col-1:22%;--col-2:78%;" }
+
