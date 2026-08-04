@@ -54,4 +54,5 @@
 .post-grid.view-all .post-summary{grid-column:3;grid-row:1/3;margin:0;opacity:.75;transform:none;font-size:13px;line-height:1.55}
 .post-grid.view-all .read-more{grid-column:4;grid-row:1/3;margin:0;font-size:0}
 .post-grid.view-all .read-more i{font-size:13px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.65)}
+.post-grid .post-card.view-hidden{display:none}
 @media(max-width:760px){.post-grid.view-featured{display:flex;flex-direction:column}.post-grid.view-featured .post-card:first-child{min-height:300px}.post-grid.view-all .post-card{grid-template-columns:44px 1fr 38px;grid-template-rows:auto auto}.post-grid.view-all .post-meta,.post-grid.view-all .post-card h3{grid-column:2}.post-grid.view-all .post-summary{display:none}.post-grid.view-all .read-more{grid-column:3}.post-grid.view-all .post-card h3{font-size:17px}}
