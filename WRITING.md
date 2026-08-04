@@ -1,55 +1,107 @@
 # 如何发布新文章
 
-这个仓库目前是纯静态 GitHub Pages，不需要安装 Hexo。文章直接放在独立目录中，推送到 `master` 后自动上线。
+博客现在使用 GitHub Pages 自带的 Jekyll 自动生成系统。以后发布文章，只需要在 `_posts` 文件夹中新增 **一个 Markdown 文件**；首页卡片、日期、分类、搜索结果、最近三篇、精华三篇和文章详情页都会自动更新。
 
-## 1. 新建文章页面
+## 最简单的 GitHub 网页发布步骤
 
-复制 `templates/article-template.html`，放到：
+1. 打开仓库：`https://github.com/lovelyyx/lovelyyx.github.io`。
+2. 点击 `_posts` 文件夹。
+3. 点击右上方 **Add file**。
+4. 点击 **Create new file**。
+5. 在文件名输入框填写：`年-月-日-英文短名.md`。
 
-```text
-YYYY/MM/DD/文章英文短名/index.html
-```
-
-例如：
-
-```text
-2026/08/03/my-summer-note/index.html
-```
-
-在复制后的文件中修改标题、日期、分类、摘要和 `<article class="article-body">` 内的正文。
-
-正文支持常用 HTML：
-
-- 段落：`<p>正文</p>`
-- 二级标题：`<h2>标题</h2>`
-- 图片：`<img src="/images/文件名.jpg" alt="说明">`
-- 引用：`<blockquote>引用内容</blockquote>`
-- 代码：`<pre><code>代码</code></pre>`
-
-## 2. 在首页加入文章
-
-打开根目录 `index.html`，在 `.post-grid` 中复制一张 `.post-card`，然后修改：
-
-- `href`：文章网址
-- `data-category`：分类
-- `data-date`：发布时间
-- `data-featured="true"`：加入“精华三篇”；设为 `false` 则不加入
-- 标题、摘要、日期与图标
-
-首页的“最近三篇”会按 `data-date` 排序，“精华三篇”会读取 `data-featured`，“全部文章”会展示所有卡片。
-
-## 3. 增加分类
-
-在首页 `.category-buttons` 中复制一个分类按钮，并在对应文章卡片上填写相同的 `data-category`。
-
-## 4. 发布
-
-提交并推送到 `master`：
+例如，2026 年 8 月 4 日发布一篇夏日随笔：
 
 ```text
-git add .
-git commit -m "Add a new post"
-git push origin master
+2026-08-04-summer-note.md
 ```
 
-稍等片刻后，文章会出现在 `https://lovelyyx.github.io/`。
+日期必须写在文件名最前面，网站会自动把它显示成发布时间，不需要在文章内容里再次填写日期。
+
+6. 复制 `templates/article-template.md` 的内容并粘贴到编辑框。
+7. 修改标题、分类和正文。
+8. 点击 **Commit changes...**。
+9. 提交说明可填写 `Publish summer note`。
+10. 选择直接提交到 `master`，点击 **Commit changes**。
+11. 等待约 1～3 分钟，刷新博客首页。
+
+## 一篇文章只需要这样写
+
+```markdown
+---
+title: 夏天的一点记录
+category: 生活
+featured: false
+---
+
+这里写开头。首页会自动把第一段作为文章简介。
+
+<!--more-->
+
+## 今天发生的事
+
+直接写正文即可，不需要 HTML 标签。
+
+## 一些想法
+
+- 第一件事
+- 第二件事
+
+> 想突出显示的话，可以这样写。
+```
+
+只有三个设置：
+
+- `title`：文章标题。
+- `category`：目前使用 `生活`、`学习` 或 `开始`。
+- `featured`：写 `true` 会进入精华文章候选；写 `false` 则只出现在最近文章和全部文章中。
+
+`<!--more-->` 前面的第一段会自动成为首页摘要，后面的内容是正文。
+
+## 精华三篇如何计算
+
+网站会从所有 `featured: true` 的文章中，按日期自动选择最新的三篇。标记超过三篇也没有关系，首页始终只展示最新三篇；“全部文章”仍会显示所有文章。
+
+## 插入图片
+
+1. 回到仓库首页，点击 `images` 文件夹。
+2. 点击 **Add file → Upload files**。
+3. 上传图片并提交。
+4. 在文章中填写：
+
+```markdown
+![图片说明](/images/summer-photo.jpg)
+```
+
+图片文件名建议只使用小写英文字母、数字和连字符，不要包含空格。
+
+## 修改已有文章
+
+1. 打开 `_posts` 文件夹。
+2. 点击要修改的 `.md` 文件。
+3. 点击右上角的铅笔图标。
+4. 修改正文。
+5. 点击 **Commit changes...** 保存。
+
+如果需要修改发布日期，请重命名文件最前面的日期，例如把：
+
+```text
+2026-08-04-summer-note.md
+```
+
+改为：
+
+```text
+2026-08-05-summer-note.md
+```
+
+## 不再需要手动修改的文件
+
+发布普通文章时，不要修改这些文件：
+
+- `index.html`
+- `js/dream.js`
+- `_layouts/post.html`
+- `css/article.css`
+
+它们是公共页面和样式。以后每次发文章，通常只会新增或修改 `_posts` 中的一个 `.md` 文件。
