@@ -140,6 +140,7 @@ searchInput.addEventListener('input', event => renderSearch(event.target.value))
 document.querySelector('#currentYear').textContent = new Date().getFullYear();
 
 const categoryButtons = [...document.querySelectorAll('.category-buttons button')];
+const subcategoryButtons = [...document.querySelectorAll('.subcategory-buttons button')];
 const postCards = [...document.querySelectorAll('.post-card')];
 categoryButtons.forEach(button => button.addEventListener('click', () => {
   const category = button.dataset.category;
@@ -148,6 +149,10 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
     item.classList.toggle('active', active);
     item.setAttribute('aria-pressed', String(active));
   });
+  subcategoryButtons.forEach(item => {
+    item.classList.remove('active');
+    item.setAttribute('aria-pressed', 'false');
+  });
   postCards.forEach(card => {
     const matches = category === 'all' || card.dataset.category === category;
     card.classList.toggle('category-muted', !matches);
@@ -155,6 +160,27 @@ categoryButtons.forEach(button => button.addEventListener('click', () => {
   });
   const target = category === 'all' ? document.querySelector('#posts') : postCards.find(card => card.dataset.category === category);
   target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const rect = button.getBoundingClientRect();
+  burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+}));
+
+subcategoryButtons.forEach(button => button.addEventListener('click', () => {
+  const subcategory = button.dataset.subcategory;
+  categoryButtons.forEach((item, index) => {
+    item.classList.toggle('active', index === 0);
+    item.setAttribute('aria-pressed', String(index === 0));
+  });
+  subcategoryButtons.forEach(item => {
+    const active = item === button;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+  postCards.forEach(card => {
+    const matches = card.dataset.subcategory === subcategory;
+    card.classList.toggle('category-muted', !matches);
+    card.classList.toggle('category-match', matches);
+  });
+  postCards.find(card => card.dataset.subcategory === subcategory)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const rect = button.getBoundingClientRect();
   burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
 }));
@@ -172,6 +198,10 @@ postViewButtons.forEach(button => button.addEventListener('click', () => {
   categoryButtons.forEach((item, index) => {
     item.classList.toggle('active', index === 0);
     item.setAttribute('aria-pressed', String(index === 0));
+  });
+  subcategoryButtons.forEach(item => {
+    item.classList.remove('active');
+    item.setAttribute('aria-pressed', 'false');
   });
   postCards.forEach(card => card.classList.remove('category-muted', 'category-match', 'view-hidden'));
   postGrid.classList.remove('view-recent', 'view-featured', 'view-all');

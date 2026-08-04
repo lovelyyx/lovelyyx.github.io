@@ -31,6 +31,7 @@
 ---
 title: 夏天的一点记录
 category: 生活
+subcategory: 日常记录
 featured: false
 ---
 
@@ -54,6 +55,7 @@ featured: false
 
 - `title`：文章标题。
 - `category`：目前使用 `生活`、`学习` 或 `开始`。
+- `subcategory`：可选的子分类，例如 `论文分享`、`实验复现` 或 `日常记录`；填写后首页会自动生成筛选按钮。
 - `featured`：写 `true` 会进入精华文章候选；写 `false` 则只出现在最近文章和全部文章中。
 
 `<!--more-->` 前面的第一段会自动成为首页摘要，后面的内容是正文。

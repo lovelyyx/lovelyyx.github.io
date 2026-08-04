@@ -48,6 +48,18 @@ layout: null
               <button type="button" data-category="{{ category_name }}" aria-pressed="false"><i class="fa-solid {{ category_icon }}"></i><span>{{ category_name }}</span><b>{{ category[1] | size }}</b></button>
             {% endfor %}
           </div>
+          {% assign seen_subcategories = "|" %}
+          <div class="subcategory-buttons" aria-label="文章子分类">
+            {% for post in site.posts %}
+              {% if post.subcategory %}
+                {% assign subcategory_token = post.subcategory | prepend: "|" | append: "|" %}
+                {% unless seen_subcategories contains subcategory_token %}
+                  <button type="button" data-subcategory="{{ post.subcategory }}" aria-pressed="false"><i class="fa-solid fa-tag"></i>{{ post.subcategory }}</button>
+                  {% assign seen_subcategories = seen_subcategories | append: post.subcategory | append: "|" %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </div>
 
@@ -75,9 +87,9 @@ layout: null
         {% for post in site.posts %}
           {% assign category = post.categories | first %}
           {% case category %}{% when "生活" %}{% assign card_color = "card-yellow" %}{% assign post_icon = "fa-sun" %}{% when "学习" %}{% assign card_color = "card-green" %}{% assign post_icon = "fa-pencil" %}{% else %}{% assign card_color = "card-orange" %}{% assign post_icon = "fa-face-smile" %}{% endcase %}
-          <a class="post-card {{ card_color }}" data-category="{{ category }}" data-date="{{ post.date | date_to_xmlschema }}" data-featured="{{ post.featured | default: false }}" href="{{ post.url | relative_url }}">
+          <a class="post-card {{ card_color }}" data-category="{{ category }}" data-subcategory="{{ post.subcategory }}" data-date="{{ post.date | date_to_xmlschema }}" data-featured="{{ post.featured | default: false }}" href="{{ post.url | relative_url }}">
             <div class="post-icon"><i class="fa-solid {{ post_icon }}"></i></div>
-            <p class="post-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ category }}</p>
+            <p class="post-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ category }}{% if post.subcategory %} · {{ post.subcategory }}{% endif %}</p>
             <h3>{{ post.title }}</h3>
             <p class="post-summary">{{ post.excerpt | strip_html | strip_newlines | truncate: 78 }}</p>
             <span class="read-more">继续阅读 <i class="fa-solid fa-arrow-right"></i></span>

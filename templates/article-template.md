@@ -1,6 +1,7 @@
 ---
 title: 在这里填写文章标题
 category: 生活
+subcategory: 日常记录
 featured: false
 ---
 
