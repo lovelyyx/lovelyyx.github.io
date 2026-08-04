@@ -1,7 +1,7 @@
 ---
 title: Hello World
 category: 开始
-featured: true
+featured: false
 ---
 
 你好，世界。这是博客的第一声问候。

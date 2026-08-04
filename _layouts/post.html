@@ -7,7 +7,7 @@
   <title>{{ page.title }} | Lovelyyx</title>
   <link rel="icon" type="image/png" href="/images/lovelyyx-star-avatar.png">
   <link rel="apple-touch-icon" href="/images/lovelyyx-star-avatar.png">
-  <link rel="stylesheet" href="/css/article.css">
+  <link rel="stylesheet" href="/css/article.css?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <canvas class="article-canvas" aria-hidden="true"></canvas>
@@ -24,8 +24,7 @@
       {% endif %}
       <div class="article-meta">
         <span>{{ page.date | date: "%Y.%m.%d" }}</span>
-        <span>{{ page.categories | first | default: "随笔" }}</span>
-        {% if page.subcategory %}<span class="article-subcategory">子分类 · {{ page.subcategory }}</span>{% endif %}
+        <span class="article-taxonomy">{{ page.categories | first | default: "随笔" }}{% if page.subcategory %} · {{ page.subcategory }}{% endif %}</span>
         {% assign reading_minutes = content | strip_html | size | divided_by: 500 | plus: 1 %}
         <span>约 {{ reading_minutes }} 分钟</span>
       </div>
@@ -36,7 +35,7 @@
       <img class="article-character" src="/images/zsiga-listening.png" alt="Zsiga">
     </footer>
   </main>
-  <script src="/js/article.js"></script>
+  <script src="/js/article.js?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>
 

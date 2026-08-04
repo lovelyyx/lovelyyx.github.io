@@ -12,7 +12,7 @@ layout: null
   <link rel="icon" type="image/png" href="/images/lovelyyx-star-avatar.png">
   <link rel="apple-touch-icon" href="/images/lovelyyx-star-avatar.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="/css/dream.css">
+  <link rel="stylesheet" href="/css/dream.css?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <canvas id="sparkCanvas" aria-hidden="true"></canvas>
@@ -118,6 +118,6 @@ layout: null
     <p>喜欢折腾技术，也喜欢记录生活。这个博客是我的数字花园，希望你在这里也能遇见一点好心情。</p>
     <a class="primary-action" href="https://github.com/lovelyyx" target="_blank" rel="noopener">在 GitHub 找到我</a>
   </dialog>
-  <script src="/js/dream.js"></script>
+  <script src="/js/dream.js?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>
