@@ -110,20 +110,13 @@ featured: false
 
 ## 可折叠并可复制的代码
 
-折叠代码必须在 `details` 后添加 `markdown="1"`：
+所有多行代码都会自动变成折叠代码框并显示“复制”按钮，只需要写普通代码块：
 
 ````markdown
-<details markdown="1">
-<summary>点击展开代码</summary>
-
 ```bash
 python -m pip install torch
 ```
-
-</details>
 ````
-
-所有代码块都会自动显示“复制”按钮。
 
 ## 自定义表格列宽并隐藏表头
 

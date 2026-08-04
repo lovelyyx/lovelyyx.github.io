@@ -21,14 +21,9 @@ featured: false
 
 > 需要强调的话，可以这样写。
 
-<details markdown="1">
-<summary>点击展开代码</summary>
-
 ```python
 print("Hello, Lovelyyx!")
 ```
-
-</details>
 
 |  |  |
 | --- | --- |

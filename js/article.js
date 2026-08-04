@@ -25,6 +25,19 @@ function repairCollapsedCode() {
   });
 }
 
+function collapseAllCodeBlocks() {
+  document.querySelectorAll('.article-body pre').forEach(pre => {
+    if (pre.closest('details')) return;
+    const details = document.createElement('details');
+    details.className = 'code-details';
+    const summary = document.createElement('summary');
+    summary.textContent = '点击展开代码';
+    pre.parentNode.insertBefore(details, pre);
+    details.appendChild(summary);
+    details.appendChild(pre);
+  });
+}
+
 async function copyCode(code, button) {
   const text = code.textContent;
   try {
@@ -65,6 +78,7 @@ function addCopyButtons() {
 }
 
 repairCollapsedCode();
+collapseAllCodeBlocks();
 addCopyButtons();
 
 const articleCanvas = document.querySelector('.article-canvas');
